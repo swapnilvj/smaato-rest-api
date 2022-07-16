@@ -1,5 +1,7 @@
-package com.smaato;
+package com.smaato.controller;
 
+import com.smaato.exception.RestServiceException;
+import com.smaato.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

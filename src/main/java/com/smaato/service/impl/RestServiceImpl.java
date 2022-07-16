@@ -1,5 +1,7 @@
-package com.smaato;
+package com.smaato.service.impl;
 
+import com.smaato.exception.RestServiceException;
+import com.smaato.service.RestService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.*;
 
-import static com.smaato.RestServiceConstants.*;
+import static com.smaato.util.RestServiceConstants.*;
 
 @Service
 public class RestServiceImpl implements RestService {

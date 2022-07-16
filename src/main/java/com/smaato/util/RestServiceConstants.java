@@ -1,4 +1,4 @@
-package com.smaato;
+package com.smaato.util;
 
 public class RestServiceConstants {
     public static final String ENDPOINT_RESPONSE_STATUS = "Endpoint Response Status: %s";
