@@ -47,16 +47,14 @@ public class RequestMetricServiceImpl implements RequestMetricService {
         return timeMap.get(time).get(id);
     }
 
-    //@Scheduled(fixedDelayString = "${log.counter.duration}")
-    @Scheduled(cron = "1 * * * * *")
+    @Scheduled(cron = "${log.counter.cron}")
     public void logCountOfUniqueRequests() {
         logger.info(COUNT_OF_UNIQUE_REQUESTS_IN_CURRENT_MINUTE_MSG);
         timeMap.getOrDefault(calculateLastMinute(), Collections.emptyMap()).entrySet().forEach(uniqueRequestEntry ->
                 logger.info(String.format("\tid: %s \tCount: %d", uniqueRequestEntry.getKey(), uniqueRequestEntry.getValue())));
     }
 
-    //TODO chnange to cron
-    @Scheduled(fixedDelayString = "${counter.cleanup.duration}")
+    @Scheduled(cron = "${counter.cleanup.cron}")
     public void cleanup() {
         logger.info("TimeMap cleanup");
         String now = DATE_FORMAT.format(new Date());

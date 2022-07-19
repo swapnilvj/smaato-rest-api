@@ -49,7 +49,6 @@ public class RestServiceImpl implements RestService {
             throw new RestServiceException(String.format(REST_SERVICE_EXCEPTION_ERROR_MSG, id, endpoint));
 
         } catch (Exception ex) {
-
             logger.info(ex.getMessage());
             logger.info(String.format(APPLICATION_COULD_NOT_PROCESS_THE_RESPONSE_ERROR_MSG, id, endpoint));
             throw ex;
