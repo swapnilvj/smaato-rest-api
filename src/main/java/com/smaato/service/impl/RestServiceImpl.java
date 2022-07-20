@@ -6,18 +6,20 @@ import com.smaato.service.RestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.smaato.util.RestServiceConstants.*;
 import static com.smaato.util.RestServiceHelper.buildEndpointUrlTemplate;
-import static com.smaato.util.RestServiceHelper.buildRestTemplate;
 
 @Service
 public class RestServiceImpl implements RestService {
@@ -25,10 +27,12 @@ public class RestServiceImpl implements RestService {
     private final static Logger logger = LoggerFactory.getLogger(RestServiceImpl.class);
 
     private RequestMetricService requestMetricService;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public RestServiceImpl(RequestMetricService requestMetricService) {
+    public RestServiceImpl(RequestMetricService requestMetricService, RestTemplate restTemplate) {
         this.requestMetricService = requestMetricService;
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -38,8 +42,6 @@ public class RestServiceImpl implements RestService {
         Map<String, Integer> params = buildQueryParamMap(id, timestamp);
 
         try {
-            RestTemplate restTemplate = buildRestTemplate();
-
             ResponseEntity<Object> responseEntity = restTemplate.getForEntity(endpointUrlTemplate, Object.class, params);
             logger.info(String.format(ENDPOINT_RESPONSE_STATUS, responseEntity.getStatusCode()));
 

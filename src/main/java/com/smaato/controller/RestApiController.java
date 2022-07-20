@@ -32,9 +32,6 @@ public class RestApiController {
     public String processRequest(@RequestParam String id,
                                  @RequestParam(required = false) String endpoint,
                                  @RequestAttribute String timestamp) {
-        //TODO remove logger before submit
-        logger.info("Inside processRequest");
-        logger.info("timestamp: " + timestamp);
 
         if (null != endpoint) {
             try {
