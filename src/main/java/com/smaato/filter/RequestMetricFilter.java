@@ -29,8 +29,7 @@ public class RequestMetricFilter implements Filter {
         String time = DATE_FORMAT.format(new Date());
         request.setAttribute("timestamp", time);
 
-        //TODO remove logger before submit
-        String id = (String) request.getParameter("id");
+        String id = request.getParameter("id");
         logger.info("id:" + id);
         if(id != null) {
             metricService.increaseRequestCount(time, id);
